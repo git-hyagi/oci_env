@@ -13,6 +13,10 @@ services:
     image: "localhost/oci_env/pulp:base"
     cap_add:
       - SYS_PTRACE
+      - CAP_SYS_ADMIN
+      - CAP_MKNOD
+    devices:
+      - "/dev/fuse:/dev/fuse"
     env_file:
       - "{OCI_ENV_DIR}/.compiled/{COMPOSE_PROJECT_NAME}/combined.env"
       - "{OCI_ENV_CONFIG_FILE}"
@@ -34,6 +38,8 @@ services:
     ports:
       - "{API_PORT}:{NGINX_PORT}"
       - "{DOCS_PORT}:{NGINX_DOCS_PORT}"
+      - "5678:5678"
+      - "5679:5679"
     depends_on:
       - _base
     volumes:
