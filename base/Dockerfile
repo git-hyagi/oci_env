@@ -1,4 +1,5 @@
 ARG BASE_IMAGE=ghcr.io/pulp/pulp-ci-centos9:latest
+#ARG BASE_IMAGE=ghcr.io/pulp/pulp-ci-centos:3.39.18
 FROM $BASE_IMAGE
 
 # configure S6 to use env variables
@@ -11,6 +12,7 @@ ARG PYTHON_VERSION=3.11
 RUN switch_python "$PYTHON_VERSION"
 
 RUN pip3 install -r dev_requirements.txt
+RUN dnf -y install cairo
 
 RUN dnf -y install gettext
 
