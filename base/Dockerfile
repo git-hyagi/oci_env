@@ -1,4 +1,5 @@
 ARG BASE_IMAGE=ghcr.io/pulp/pulp-ci-centos9:latest
+#ARG BASE_IMAGE=ghcr.io/pulp/pulp-ci-centos:3.39.18
 FROM $BASE_IMAGE
 
 # configure S6 to use env variables
@@ -11,9 +12,11 @@ COPY dev_requirements.txt /dev_requirements.txt
 
 COPY switch_python /usr/bin/switch_python
 ARG PYTHON_VERSION=3.9
+#ARG PYTHON_VERSION=3.11
 RUN switch_python "$PYTHON_VERSION"
 
 RUN pip3 install -r dev_requirements.txt
+RUN dnf -y install cairo
 
 COPY settings.py /etc/pulp/settings.py
 COPY s6-rc.d/oci-env-prepare/ /etc/s6-overlay/s6-rc.d/oci-env-prepare/

@@ -10,7 +10,12 @@ services:
     entrypoint: "/bin/true"
 
   pulp:
+    deploy:
+      resources:
+        limits:
+          memory: 1g
     image: "localhost/oci_env/pulp:base"
+    privileged: true
     cap_add:
       - SYS_PTRACE
       - CAP_SYS_ADMIN
@@ -40,6 +45,7 @@ services:
       - "{DOCS_PORT}:{NGINX_DOCS_PORT}"
       - "5678:5678"
       - "5679:5679"
+      - "5432:5432"
     depends_on:
       - _base
     volumes:
