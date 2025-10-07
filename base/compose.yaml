@@ -39,10 +39,12 @@ services:
 
     ports:
       - "{API_PORT}:{NGINX_PORT}"
-      - "{DOCS_PORT}:{NGINX_DOCS_PORT}"
+      #- "{NGINX_PORT}:{NGINX_PORT}"
+      #- "{DOCS_PORT}:{NGINX_DOCS_PORT}"
       - "5678:5678"
       - "5679:5679"
       - "5432:5432"
+      - "15678:15678"
     depends_on:
       - _base
     volumes:

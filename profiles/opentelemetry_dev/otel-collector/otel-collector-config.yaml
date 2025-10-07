@@ -26,7 +26,7 @@ exporters:
     endpoint: 0.0.0.0:8889
     # send_timestamps: true
     namespace: pulp
-  logging:
+  debug:
     verbosity: detailed
   otlp/jaeger:
     endpoint: jaeger:4317
